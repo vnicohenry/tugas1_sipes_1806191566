@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lihat Pesawat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="mt-4 p-5" >
+    <h1 class="mb-5" style="text-align: center;">Detail Pesawat</h1>
+    <div class="row mb-2" style="width: 40%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Nomor Seri Pesawat</div>
+        <div class="col-md-5 ml-auto" th:text="${pesawat.nomorSeri}"></div>
+    </div>
+    <div class="row mb-2" style="width: 40%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Jenis Pesawat</div>
+        <div class="col-md-5 ml-auto" th:text="${pesawat.jenisPesawat}"></div>
+    </div>
+    <div class="row mb-2" style="width: 40%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Nama Tipe Pesawat</div>
+        <div class="col-md-5 ml-auto" th:text="${pesawat.tipe.namaTipe}"></div>
+    </div>
+    <div class="row mb-2" style="width: 40%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Maskapai</div>
+        <div class="col-md-5 ml-auto" th:text="${pesawat.maskapai}"></div>
+    </div>
+    <div class="row mb-2" style="width: 40%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Tempat dibuat</div>
+        <div class="col-md-5 ml-auto" th:text="${pesawat.tempatDibuat}"></div>
+    </div>
+    <div class="row mb-4" style="width: 40%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Tanggal dibuat</div>
+        <div class="col-md-5 ml-auto" th:text="${pesawat.tanggalDibuat}"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 table-daftar-teknisi">
+            <p class="font-weight-bold mb-3" style="text-align: center;">Daftar Teknisi Pesawat</p>
+            <br><br>
+            <table class="table text-center" style="margin:auto;">
+                <thead class="thead-dark text-white">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Nomor Telepon</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="teknisi, iter : ${listTeknisi}">
+                    <td th:text="${iter.count}"></td>
+                    <td th:text="${teknisi.namaTeknisi}"></td>
+                    <td th:text="${teknisi.noTelepon}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8 table-daftar-penerbangan">
+            <p class="font-weight-bold" style="margin-bottom: 0.3rem !important;text-align: center;">Daftar Penerbangan</p>
+            <div class="container tambah-penerbangan d-flex flex-row-reverse" style="padding-right: 0 !important;">
+                <form th:action="@{/pesawat/}+${pesawat.id}+@{/tambah-penerbangan}" th:object="${pesawat}" method="POST">
+                    <div class="form-group m-0">
+                        <label class="d-block mb-0"><small>Tambah Penerbangan</small></label>
+                        <select class="form-control-sm" th:field="*{listPenerbangan[0].id}">
+                            <option th:each="penerbangan : ${listPenerbangan}" th:text="${penerbangan.nomorPenerbangan}" th:value="${penerbangan.id}"></option>
+                        </select>
+                        <button th:if="${isi}" type="submit" class="btn btn-primary btn-sm m-1" style="margin-right: 0 !important; margin-top: 0 !important">Tambah</button>
+                        <button th:unless="${isi}" type="submit" class="btn btn-primary btn-sm m-1" disabled style="margin-right: 0 !important; margin-top: 0 !important">Tambah</button>
+                    </div>
+                </form>
+            </div>
+            <table class="table text-center" style="margin:auto;">
+                <thead class="thead-dark text-white">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nomor Penerbangan</th>
+                    <th scope="col">Bandara Asal</th>
+                    <th scope="col">Bandara Tujuan</th>
+                    <th scope="col">Waktu Berangkat</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pm, iter : ${pesawat.listPenerbangan}">
+                    <td th:text="${iter.count}"></td>
+                    <td th:text="${pm.nomorPenerbangan}"></td>
+                    <td th:text="${pm.kodeBandaraAsal}"></td>
+                    <td th:text="${pm.kodeBandaraTujuan}"></td>
+                    <td th:text="${pm.waktuBerangkat}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

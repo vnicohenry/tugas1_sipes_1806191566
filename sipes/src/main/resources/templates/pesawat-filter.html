@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Filter Pesawat</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container mt-2 pl-5 pr-5 pt-5" >
+    <div class="card text-white bg-info mb-5" style="margin:auto; max-width: 18rem;">
+        <div class="card-header card-title">Cari Pesawat</div>
+        <div class="card-body bg-white text-body">
+            <form th:action="@{/pesawat/filter}" method="GET">
+                <div class="form-group mb-0">
+                    <label>Penerbangan:</label>
+                    <select class="form-control" name="idPenerbangan">
+                        <option th:each="penerbangan : ${listPenerbangan}" th:text="${penerbangan.nomorPenerbangan}" th:value="${penerbangan.id}"></option>
+                    </select>
+                    <label>Tipe:</label>
+                    <select class="form-control" name="idTipe">
+                        <option th:each="tipe : ${listTipe}" th:text="${tipe.namaTipe}" th:value="${tipe.id}"></option>
+                    </select>
+                    <label>Teknisi:</label>
+                    <select class="form-control" name="idTeknisi">
+                        <option th:each="teknisi : ${listTeknisi}" th:text="${teknisi.namaTeknisi}" th:value="${teknisi.id}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-info d-flex m-0 mt-2 ml-auto" >Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h1 th:if="${notFound}" class="text-center">Hasil Tidak Ditemukan!</h1>
+    <table th:unless="${notFound}" class="table text-center">
+        <thead class="thead-dark text-white">
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nomor Seri</th>
+            <th scope="col">Jenis</th>
+            <th scope="col">Tipe</th>
+            <th scope="col">Maskapai</th>
+            <th scope="col">Nomor Penerbangan</th>
+            <th scope="col">Teknisi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pesawat, iter : ${listPesawat}">
+            <td th:text="${iter.count}"></td>
+            <td th:text="${pesawat.nomorSeri}"></td>
+            <td th:text="${pesawat.jenisPesawat}"></td>
+            <td th:text="${pesawat.tipe.namaTipe}"></td>
+            <td th:text="${pesawat.maskapai}"></td>
+            <td th:text="${penerbangan.nomorPenerbangan}"></td>
+            <td th:text="${teknisi.namaTeknisi}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

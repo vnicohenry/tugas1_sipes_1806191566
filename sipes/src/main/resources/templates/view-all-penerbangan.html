@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Lihat Penerbangan</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container mt-4 pl-5 pr-5 pt-5" >
+    <h1 class="mb-5" style="text-align: center;">Daftar Penerbangan</h1>
+    <a class="btn btn-primary text-white p-2 pl-4 pr-4 mb-2" th:href="@{/penerbangan/tambah}">+ Tambah Penerbangan</a>
+    <table class="table text-center">
+        <thead class="thead-dark text-white">
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Kode Penerbangan</th>
+            <th scope="col">Bandara Asal</th>
+            <th scope="col">Bandara Tujuan</th>
+            <th scope="col">Waktu Berangkat</th>
+            <th scope="col">Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="penerbangan, iter : ${listPenerbangan}">
+            <td th:text="${iter.count}"></td>
+            <td th:text="${penerbangan.nomorPenerbangan}"></td>
+            <td th:text="${penerbangan.kodeBandaraAsal}"></td>
+            <td th:text="${penerbangan.kodeBandaraTujuan}"></td>
+            <td th:text="${listWaktuPenerbangan[iter.index]}"></td>
+            <td>
+                <a class="btn btn-sm btn-primary" th:href="@{/penerbangan/} + ${penerbangan.id}">Lihat</a>
+                <a class="btn btn-sm btn-warning" th:href="@{/penerbangan/ubah/} + ${penerbangan.id}">Ubah</a>
+                <a class="btn btn-sm btn-danger" th:href="@{/penerbangan/hapus/} + ${penerbangan.id}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

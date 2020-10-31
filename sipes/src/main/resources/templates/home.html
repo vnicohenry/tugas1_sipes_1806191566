@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <div class="d-flex w-100 justify-content-center align-items-center" style="height: 100vh">
+        <div class= "container-fluid h-50 w-50">
+            <div class="welcome container-fluid bg-info w-100 p-4 rounded-lg" style="margin-bottom: 40px">
+                <h1 class="text-white text-center p-4">Selamat Datang di SIPESAWAT!</h1>
+            </div>
+            <h3 class="text-center mb-4">Daftar Fitur:</h3>
+            <div class="fitur-wrapped container d-flex justify-content-center flex-wrap align-items-start text-center">
+                <a th:href="@{/pesawat}" class="btn btn-info rounded-lg p-2 pl-4 pr-4 m-1">Pesawat</a>
+                <a th:href="@{/penerbangan}" class="btn btn-info rounded-lg p-2 pl-4 pr-4 m-1">Penerbangan</a>
+                <a href="/pesawat/pesawat-tua" class="btn btn-info rounded-lg p-2 pl-4 pr-4 m-1" >Cari</a>
+                <a href="/pesawat/filter?idPenerbangan=1&idTipe=1&idTeknisi=1" class="btn btn-info rounded-lg p-2 pl-4 pr-4 m-1" >Filter</a>
+                <a href="/pesawat/jumlah-teknisi" class="btn btn-info rounded-lg p-2 pl-4 pr-4 m-1" >Bonus</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

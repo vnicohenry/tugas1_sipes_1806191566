@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lihat Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container mt-4 pl-5 pr-5 pt-5" >
+    <h1 class="mb-5" style="text-align: center;">Detail Penerbangan</h1>
+    <div class="row mb-2" style="width: 45%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Kode Penerbangan</div>
+        <div class="col-md-5 ml-auto" th:text="${penerbangan.nomorPenerbangan}"></div>
+    </div>
+    <div class="row mb-2" style="width: 45%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Kode Bandara Asal</div>
+        <div class="col-md-5 ml-auto" th:text="${penerbangan.kodeBandaraAsal}"></div>
+    </div>
+    <div class="row mb-2" style="width: 45%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Kode Bandara Tujuan</div>
+        <div class="col-md-5 ml-auto" th:text="${penerbangan.kodeBandaraTujuan}"></div>
+    </div>
+    <div class="row mb-2" style="width: 45%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Waktu Berangkat</div>
+        <div class="col-md-5 ml-auto" th:text="${waktuBerangkat}"></div>
+    </div>
+    <div class="row mb-2" style="width: 45%; margin:auto; text-align: start;">
+        <div class="font-weight-bold col-md-6">Nomor Seri Pesawat</div>
+        <div class="col-md-5 ml-auto" th:if="${penerbangan.pesawat}" th:text="${penerbangan.pesawat.nomorSeri}"></div>
+        <div class="col-md-5 ml-auto" style="padding-right: 0 !important;" th:unless="${penerbangan.pesawat}">Belum diassign pesawat</div>
+    </div>
+</div>
+</body>
+</html>

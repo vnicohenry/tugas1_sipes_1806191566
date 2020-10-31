@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ubah Pesawat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container mt-4 pl-5 pr-5 pt-5" >
+    <h1 style="text-align: center;">Form Ubah Pesawat</h1>
+    <form th:action="@{/pesawat/ubah}" th:object="${pesawat}" method="POST" class="p-5" style="width: 60%; margin: auto !important;">
+        <input th:field="*{id}" type="hidden">
+        <input th:field="*{tipe.id}" type="hidden">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Maskapai</label>
+            <div class="col-sm-9">
+                <input  th:field="*{maskapai}" type="text" class="form-control" th:value="*{maskapai}" th:required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Tanggal Dibuat</label>
+            <div class="col-sm-9">
+                <input  type="date" class="form-control" th:field="*{tanggalDibuat}" th:value="${{date}}" th:required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Tempat Dibuat</label>
+            <div class="col-sm-9">
+                <input  th:field="*{tempatDibuat}" type="text" class="form-control" th:value="*{tempatDibuat}" th:required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Jenis</label>
+            <div class="col-sm-9">
+                <select  th:field="*{jenisPesawat}" class="form-control" id="jenisPesawatInput" th:value="*{jenisPesawat}" th:required="required">
+                    <option value="Komersial">Komersial</option>
+                    <option value="Militer">Militer</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <div class="col-sm-6 col-form-label"></div>
+            <div class="col-sm-5 d-flex justify-content-end">
+                <a href="/pesawat" class="btn btn-outline-secondary m-3">Kembali</a>
+                <button type="submit" class="btn btn-primary m-3" style="margin-right: 0 !important">Submit</button>
+            </div>
+            <div class="col-sm-1 col-form-label"></div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
